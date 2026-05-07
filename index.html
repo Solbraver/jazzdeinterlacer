@@ -47,9 +47,11 @@
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
+      display: flex; align-items: center; gap: 8px;
       font-size: 15px; font-weight: 600; letter-spacing: -.3px;
       color: var(--text);
     }
+    .nav-logo img { width: 24px; height: 24px; border-radius: 6px; }
     .nav-logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--muted); }
     .nav-links a { color: var(--muted); transition: color .15s; }
@@ -67,6 +69,12 @@
       max-width: 820px; margin: 0 auto;
       padding: 96px 24px 80px;
       text-align: center;
+    }
+    .hero-icon {
+      width: 96px; height: 96px;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.5);
+      margin-bottom: 24px;
     }
     .badge {
       display: inline-flex; align-items: center; gap: 6px;
@@ -465,7 +473,10 @@
 
 <!-- ── NAV ──────────────────────────────────────────────────────────── -->
 <nav>
-  <div class="nav-logo">Jazz<span>Deinterlacer</span></div>
+  <div class="nav-logo">
+    <img src="icon.png" alt="JazzDeinterlacer icon">
+    Jazz<span>Deinterlacer</span>
+  </div>
   <div class="nav-links">
     <a href="#features">Features</a>
     <a href="#ai">AI Mode</a>
@@ -477,6 +488,7 @@
 
 <!-- ── HERO ─────────────────────────────────────────────────────────── -->
 <section class="hero">
+  <img src="icon.png" alt="JazzDeinterlacer" class="hero-icon">
   <div class="badge">
     <div class="badge-dot"></div>
     Early Access — macOS 14+
