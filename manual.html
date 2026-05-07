@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Manual — JazzDeinterlacer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0c0c0e;
+      --bg2:       #111114;
+      --bg3:       #18181c;
+      --border:    #28282e;
+      --text:      #e8e8ec;
+      --muted:     #6b6b78;
+      --accent:    #e8a030;
+      --accent-dim:#7a5218;
+      --ai:        #818cf8;
+      --green:     #34d399;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 58px;
+      background: rgba(12,12,14,.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -.3px; color: var(--text); }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; font-size: 14px; }
+    .nav-links a { color: var(--muted); transition: color .15s; }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+    .nav-cta {
+      font-size: 13px; font-weight: 600;
+      padding: 7px 16px; border-radius: 7px;
+      background: var(--accent); color: #0c0c0e;
+    }
+    .nav-cta:hover { opacity: .85; text-decoration: none; }
+
+    /* ── LAYOUT ── */
+    .page {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+      min-height: calc(100vh - 58px);
+    }
+    @media (max-width: 700px) {
+      .page { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+    }
+
+    /* ── SIDEBAR TOC ── */
+    .sidebar {
+      position: sticky;
+      top: 78px;
+      align-self: start;
+      padding: 40px 24px 40px 0;
+      border-right: 1px solid var(--border);
+    }
+    .sidebar-title {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 14px;
+    }
+    .toc { list-style: none; }
+    .toc li { margin-bottom: 4px; }
+    .toc a {
+      font-size: 13px; color: var(--muted);
+      display: block; padding: 3px 0;
+      transition: color .12s;
+    }
+    .toc a:hover { color: var(--text); text-decoration: none; }
+    .toc .sub { padding-left: 12px; }
+    .toc .sub a { font-size: 12px; }
+
+    /* ── CONTENT ── */
+    .content {
+      padding: 56px 0 80px 48px;
+      max-width: 720px;
+    }
+
+    .page-title {
+      font-size: 36px; font-weight: 700;
+      letter-spacing: -.8px; margin-bottom: 6px;
+    }
+    .page-title span { color: var(--accent); }
+    .page-meta { font-size: 13px; color: var(--muted); margin-bottom: 56px; }
+
+    h2 {
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -.4px;
+      margin: 52px 0 16px;
+      padding-top: 52px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+    }
+    h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+    h3 {
+      font-size: 16px; font-weight: 600;
+      color: var(--accent);
+      margin: 28px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    p { margin-bottom: 14px; color: #c8c8ce; }
+
+    ol, ul { margin: 0 0 16px 22px; color: #c8c8ce; }
+    li { margin-bottom: 6px; }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    /* ── TABLES ── */
+    table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0 24px; font-size: 14px;
+    }
+    th {
+      text-align: left; font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: var(--muted); padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 9px 12px; color: #c8c8ce;
+      border-bottom: 1px solid rgba(40,40,46,.6);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+
+    /* ── CODE / MONO ── */
+    code {
+      font-family: "SF Mono", "Fira Mono", monospace;
+      font-size: 13px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      color: var(--accent);
+    }
+    pre {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      overflow-x: auto;
+      margin: 16px 0 24px;
+      font-size: 13px;
+      color: #c8c8ce;
+      line-height: 1.6;
+      font-family: "SF Mono", "Fira Mono", monospace;
+    }
+
+    /* ── CALLOUTS ── */
+    .note {
+      background: rgba(232,160,48,.07);
+      border: 1px solid rgba(232,160,48,.2);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 16px 0 24px;
+      font-size: 14px;
+      color: #c8c8ce;
+    }
+    .note strong { color: var(--accent); }
+
+    .tip {
+      background: rgba(52,211,153,.07);
+      border: 1px solid rgba(52,211,153,.2);
+      border-left: 3px solid var(--green);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 16px 0 24px;
+      font-size: 14px;
+      color: #c8c8ce;
+    }
+    .tip strong { color: var(--green); }
+
+    /* ── KEYBOARD SHORTCUTS ── */
+    kbd {
+      display: inline-block;
+      font-family: "SF Mono", monospace;
+      font-size: 12px;
+      padding: 2px 7px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-bottom: 2px solid #3a3a42;
+      border-radius: 5px;
+      color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+
+    .back { display: inline-block; margin-bottom: 32px; font-size: 13px; color: var(--muted); }
+    .back:hover { color: var(--text); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">Jazz<span>Deinterlacer</span></a>
+  <div class="nav-links">
+    <a href="index.html#story">About</a>
+    <a href="index.html#features">Features</a>
+    <a href="manual.html" style="color:var(--text)">Manual</a>
+    <a href="index.html#bugs">Support</a>
+  </div>
+  <a href="index.html#pricing" class="nav-cta">Download</a>
+</nav>
+
+<!-- ── PAGE ── -->
+<div class="page">
+
+  <!-- sidebar TOC -->
+  <aside class="sidebar">
+    <p class="sidebar-title">Contents</p>
+    <ul class="toc">
+      <li><a href="#installation">1. Installation</a></li>
+      <li><a href="#quick-start">2. Quick Start</a></li>
+      <li><a href="#interface">3. Interface Overview</a></li>
+      <li><a href="#modes">4. Processing Modes</a></li>
+      <li class="sub"><a href="#deinterlace" class="sub">Deinterlace</a></li>
+      <li class="sub"><a href="#ai-deinterlace" class="sub">AI Deinterlace</a></li>
+      <li class="sub"><a href="#ivtc" class="sub">Inverse Telecine</a></li>
+      <li><a href="#colour">5. Colour Controls</a></li>
+      <li><a href="#output">6. Output Settings</a></li>
+      <li><a href="#preview-scopes">7. Preview &amp; Scopes</a></li>
+      <li><a href="#shortcuts">8. Keyboard Shortcuts</a></li>
+      <li><a href="#license">9. License Activation</a></li>
+      <li><a href="#troubleshooting">10. Troubleshooting</a></li>
+    </ul>
+  </aside>
+
+  <!-- main content -->
+  <main class="content">
+
+    <a href="index.html" class="back">← Back to JazzDeinterlacer</a>
+
+    <h1 class="page-title">User <span>Manual</span></h1>
+    <p class="page-meta">JazzDeinterlacer 1.0 &nbsp;·&nbsp; macOS 14 Sonoma or later</p>
+
+    <!-- 1. Installation -->
+    <h2 id="installation">1. Installation</h2>
+    <ol>
+      <li>Download <code>JazzDeinterlacer-1.0.zip</code> from the website or your Gumroad receipt.</li>
+      <li>Unzip and drag <strong>JazzDeinterlacer.app</strong> to your Applications folder.</li>
+      <li>Double-click to launch.</li>
+    </ol>
+    <div class="note">
+      <strong>⚠️ First launch — macOS security prompt</strong><br>
+      macOS may block the app with a message saying it "cannot be opened because Apple cannot check it for malicious software." This is Gatekeeper, which flags apps distributed outside the App Store.<br><br>
+      To open it: go to <strong>System Settings → Privacy &amp; Security</strong>, scroll down, and click <strong>"Open Anyway"</strong>. This prompt only appears once.
+    </div>
+
+    <!-- 2. Quick Start -->
+    <h2 id="quick-start">2. Quick Start</h2>
+    <ol>
+      <li>Click <strong>Open…</strong> in the toolbar (or drag a video file onto the window).</li>
+      <li>Select a <strong>processing mode</strong> in the bottom-left tab: <em>Deinterlace</em>, <em>AI Deinterlace</em>, or <em>Inverse Telecine</em>.</li>
+      <li>Choose your algorithm and settings.</li>
+      <li>Click <strong>Preview 3s</strong> to render a short clip and watch it inline.</li>
+      <li>When the result looks right, click <strong>Render</strong> to export the full file.</li>
+    </ol>
+    <p>The output file is automatically placed in the same folder as the source, with a descriptive suffix such as <code>_deinterlace_qtgmc_lk_59.94p.mov</code>.</p>
+
+    <!-- 3. Interface -->
+    <h2 id="interface">3. Interface Overview</h2>
+    <pre>
+┌─────────────────────────────────────────────────────────┐
+│  Toolbar: Open · filename · Scopes · JazzDeinterlacer   │
+├──────────────────────┬──────────────────────────────────┤
+│                      │                                  │
+│   ORIGINAL           │   PROCESSED / PREVIEW            │
+│   (source frame)     │   (result frame)                 │
+│                      │                   [■] [1:1/Fit]  │
+├──────────────────────┴──────────────────────────────────┤
+│  Scrub bar  ─────────────────────────────────────────── │
+├──────────────┬──────────────────┬───────────────────────┤
+│  Mode tabs   │  Algorithm desc  │  Output · Render      │
+│  + Settings  │  + Colour panel  │                       │
+└──────────────┴──────────────────┴───────────────────────┘</pre>
+    <p>The <strong>preview background colour</strong> button (■, top-right of the preview area) changes the background behind the video — useful for checking whether the video has letterbox bars or clean edges. Options: Black, Dark Gray, Medium Gray, White. The choice is remembered between sessions.</p>
+
+    <!-- 4. Modes -->
+    <h2 id="modes">4. Processing Modes</h2>
+
+    <h3 id="deinterlace">Deinterlace</h3>
+    <p>Converts interlaced video (fields) to progressive frames.</p>
+    <table>
+      <tr><th>Algorithm</th><th>Quality</th><th>Speed</th><th>Best for</th></tr>
+      <tr><td>Field Blend</td><td>Low</td><td>Fastest</td><td>Quick web previews</td></tr>
+      <tr><td>Spatial Adaptive</td><td>Medium</td><td>Fast</td><td>General purpose</td></tr>
+      <tr><td>Motion Comp.</td><td>High</td><td>Moderate</td><td>Moving subjects</td></tr>
+      <tr><td>QTGMC</td><td>Highest</td><td>Slow</td><td>Broadcast / archival</td></tr>
+    </table>
+
+    <p><strong>QTGMC options:</strong></p>
+    <ul>
+      <li><strong>Neural Flow (RAFT):</strong> Replaces Lucas-Kanade optical flow with a neural network for better motion estimation. Higher quality, slower.</li>
+      <li><strong>Neural Engine:</strong> Runs RAFT on Apple's Neural Engine via CoreML. Faster on Apple Silicon.</li>
+    </ul>
+
+    <p><strong>Field Order</strong> controls which field is treated as temporally first.</p>
+    <ul>
+      <li><strong>Auto</strong> — reads the flag from the source file. Correct for most broadcast footage.</li>
+      <li><strong>Lower / Upper Field First</strong> — override when source metadata is wrong (visible as a "venetian blind" combing pattern).</li>
+    </ul>
+
+    <p><strong>Output Rate:</strong></p>
+    <ul>
+      <li><strong>Same as source</strong> — one progressive frame per input field pair. Halves the frame rate.</li>
+      <li><strong>Double rate</strong> — one progressive frame per field. Preserves the original temporal resolution; doubles the frame rate. Recommended for motion-heavy content.</li>
+    </ul>
+
+    <h3 id="ai-deinterlace">AI Deinterlace</h3>
+    <p>Uses <strong>Neural QTGMC</strong> — RAFT optical flow combined with QTGMC temporal smoothing, running on Apple Neural Engine. This is the highest quality mode available.</p>
+
+    <div class="tip">
+      <strong>Trial:</strong> Every download includes <strong>2 free AI Deinterlace exports</strong>. After the trial, a license ($4.99 one-time) is required to continue using AI Deinterlace. All other features remain free forever.
+    </div>
+
+    <p>Enable <strong>Neural Engine (CoreML/ANE)</strong> to offload RAFT inference to the dedicated ANE chip. Strongly recommended on Apple Silicon. First run is slower due to CoreML model compilation; subsequent runs are fast.</p>
+
+    <h3 id="ivtc">Inverse Telecine (IVTC)</h3>
+    <p>Removes 3:2 pulldown from film-sourced content that was telecined to 29.97i. Output is always 23.976p (or 24p with the conform option).</p>
+    <p>On file open, JazzDeinterlacer automatically scans the first 10 seconds to detect the pulldown cadence. The detected phase (A–E) and confidence percentage are shown in the settings panel.</p>
+    <ul>
+      <li><strong>Phase override:</strong> If auto-detection is wrong (visible as residual combing), manually select the correct phase with the A/B/C/D/E buttons.</li>
+      <li><strong>Conform 23.976 → 24:</strong> Speeds up output by 0.1% to match true 24p. Audio pitch is corrected automatically. Use when delivering to a 24p timeline.</li>
+    </ul>
+    <div class="note">
+      <strong>Note:</strong> The PROCESSED panel shows a placeholder during scrubbing — IVTC needs sequential frames and can't show a meaningful single-frame preview. Use <strong>Preview 3s</strong> or <strong>Render</strong> to see the actual output.
+    </div>
+
+    <!-- 5. Colour -->
+    <h2 id="colour">5. Colour Controls</h2>
+    <p>The <strong>Colour</strong> section (middle column of the bottom panel) applies post-processing adjustments to the exported file.</p>
+    <table>
+      <tr><th>Control</th><th>Range</th><th>Default</th><th>Purpose</th></tr>
+      <tr><td>Input Range</td><td>Video / Full</td><td>Auto-detected</td><td>Declares the luminance range of the source</td></tr>
+      <tr><td>Output Range</td><td>Video / Full</td><td>Matches input</td><td>Converts range on export if needed</td></tr>
+      <tr><td>Gamma</td><td>0.1 – 4.0</td><td>1.00</td><td>Midtone brightness curve</td></tr>
+      <tr><td>Brightness</td><td>−0.5 – +0.5</td><td>0.00</td><td>Global lift / lower</td></tr>
+      <tr><td>Contrast</td><td>0.0 – 3.0</td><td>1.00</td><td>Contrast around midpoint</td></tr>
+      <tr><td>Saturation</td><td>0.0 – 3.0</td><td>1.00</td><td>Colour intensity</td></tr>
+    </table>
+    <p><strong>Video vs Full range:</strong> Video range (broadcast/limited) uses luma 16–235. Full range uses 0–255. JazzDeinterlacer auto-detects the input range on file open. If it guesses wrong, correct it with the Input Range picker. Set Output Range differently only if you need a conversion (e.g. deliver full-range to YouTube from broadcast-range source).</p>
+    <p>The <strong>Reset</strong> button appears when any value differs from default and restores all controls to identity.</p>
+
+    <!-- 6. Output -->
+    <h2 id="output">6. Output Settings</h2>
+    <table>
+      <tr><th>Codec</th><th>Container</th><th>Notes</th></tr>
+      <tr><td>ProRes 422 HQ</td><td>.mov</td><td>Lossless quality for editing. Large files.</td></tr>
+      <tr><td>ProRes 422</td><td>.mov</td><td>Editing quality, smaller than HQ.</td></tr>
+      <tr><td>ProRes 422 LT</td><td>.mov</td><td>Proxy / offline editing.</td></tr>
+      <tr><td>H.264</td><td>.mp4</td><td>Delivery / web. Requires bundled FFmpeg.</td></tr>
+      <tr><td>H.265 (HEVC)</td><td>.mp4</td><td>Smaller than H.264 at same quality. Requires bundled FFmpeg.</td></tr>
+    </table>
+    <p><strong>Output file:</strong> Automatically set to the source file's folder with a descriptive suffix. Click <strong>Change…</strong> to pick a different path.</p>
+    <p><strong>Preview 3s:</strong> Renders only the first 3 seconds starting from the current scrub position. The result plays inline in the PROCESSED panel. Use <kbd>Space</kbd> to play/pause, <kbd>←</kbd> <kbd>→</kbd> to step frames.</p>
+    <p><strong>Render:</strong> Exports the full file. A progress bar shows frames processed. Click <strong>Cancel</strong> to stop.</p>
+
+    <!-- 7. Preview & Scopes -->
+    <h2 id="preview-scopes">7. Preview &amp; Scopes</h2>
+
+    <h3>Scrub bar</h3>
+    <p>Drag the slider or use keyboard shortcuts to move through the source. The original and processed frames update live.</p>
+
+    <h3>1:1 Zoom</h3>
+    <p>Click <strong>1:1</strong> to view the video at native pixel size. Drag to pan. Click <strong>Fit</strong> to return to fit-to-window mode.</p>
+
+    <h3>Scopes window</h3>
+    <p>Click the waveform icon (⌇) in the toolbar to open the floating <strong>Scopes</strong> window:</p>
+    <ul>
+      <li><strong>Waveform</strong> — luminance levels, left-to-right matches left-to-right of image.</li>
+      <li><strong>Vectorscope</strong> — chrominance plotted on a circle. Distance from centre = saturation; angle = hue.</li>
+      <li><strong>Histogram</strong> — per-channel (R, G, B) pixel value distribution.</li>
+    </ul>
+    <p>Scopes update on every scrub frame and can display either the <strong>Input</strong> (original) or <strong>Output</strong> (processed) signal — toggle with the selector inside the scopes window.</p>
+
+    <!-- 8. Shortcuts -->
+    <h2 id="shortcuts">8. Keyboard Shortcuts</h2>
+    <table>
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td><kbd>Space</kbd></td><td>Play / pause (source scrub or inline preview player)</td></tr>
+      <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Step one frame back / forward</td></tr>
+      <tr><td><kbd>J</kbd></td><td>Play backwards</td></tr>
+      <tr><td><kbd>K</kbd></td><td>Stop playback</td></tr>
+      <tr><td><kbd>L</kbd></td><td>Play forwards</td></tr>
+    </table>
+
+    <!-- 9. License -->
+    <h2 id="license">9. License Activation</h2>
+    <p>AI Deinterlace is unlocked with a license key purchased at <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" target="_blank">Gumroad</a>.</p>
+    <ol>
+      <li>Open <strong>JazzDeinterlacer → Settings</strong> (<kbd>⌘</kbd><kbd>,</kbd>), or click <strong>Activate License</strong> in the paywall sheet.</li>
+      <li>Paste your license key.</li>
+      <li>Click <strong>Activate</strong>.</li>
+    </ol>
+    <p>The app validates the key against Gumroad's servers. An internet connection is required for initial activation. After that, the license is stored in the macOS Keychain — no connection needed to run the app.</p>
+    <p>One license covers <strong>2 Mac activations</strong>. To move to a new Mac, contact support via the website.</p>
+
+    <!-- 10. Troubleshooting -->
+    <h2 id="troubleshooting">10. Troubleshooting</h2>
+
+    <p><strong>"JazzDeinterlacer can't be opened because Apple cannot check it for malicious software."</strong></p>
+    <p>Open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. This appears once and is expected for apps distributed outside the App Store.</p>
+
+    <p><strong>The PROCESSED panel shows a placeholder for IVTC.</strong></p>
+    <p>IVTC needs sequential frames — single-frame preview isn't meaningful. Use <strong>Preview 3s</strong> or <strong>Render</strong> to see the actual output.</p>
+
+    <p><strong>Output still has combing / looks wrong.</strong></p>
+    <p>Check the <strong>Field Order</strong> setting. If Auto is wrong, toggle between Lower Field First and Upper Field First. For IVTC, try overriding the detected phase with the A/B/C/D/E buttons.</p>
+
+    <p><strong>H.264 / H.265 is greyed out or shows an FFmpeg warning.</strong></p>
+    <p>The bundled FFmpeg binary may have lost its execute permissions. Re-download the app from the website.</p>
+
+    <p><strong>AI Deinterlace is slow on first use.</strong></p>
+    <p>CoreML compiles the RAFT model on the first run — this is a one-time cost. Enable <strong>Neural Engine</strong> in the AI Deinterlace settings for maximum speed on Apple Silicon.</p>
+
+    <p><strong>"License validation failed."</strong></p>
+    <p>Check your internet connection. The key field trims whitespace automatically, but double-check for invisible characters if you typed it manually. Contact support via the <a href="index.html#bugs">feedback form</a> if the problem persists.</p>
+
+  </main>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div style="margin-bottom:10px;">
+    <a href="index.html">Home</a> &nbsp;·&nbsp;
+    <a href="manual.html">Manual</a> &nbsp;·&nbsp;
+    <a href="index.html#bugs">Support</a> &nbsp;·&nbsp;
+    <a href="eula.html">EULA</a>
+  </div>
+  <p>© 2026 Ariel Wollinger. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

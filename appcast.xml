@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+    <channel>
+        <title>JazzDeinterlacer</title>
+        <link>https://solbraver.github.io/jazzdeinterlacer/appcast.xml</link>
+        <description>JazzDeinterlacer release notes</description>
+        <language>en</language>
+
+        <item>
+            <title>Version 1.0</title>
+            <pubDate>Thu, 07 May 2026 00:00:00 +0000</pubDate>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[
+                <h2>JazzDeinterlacer 1.0</h2>
+                <p>Initial release.</p>
+                <ul>
+                    <li>Deinterlace, Inverse Telecine, and AI Deinterlace modes</li>
+                    <li>Neural QTGMC via Apple Neural Engine</li>
+                    <li>ProRes, H.264, H.265 output</li>
+                    <li>Scopes: waveform, vectorscope, histogram</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://solbraver.github.io/jazzdeinterlacer/releases/JazzDeinterlacer-1.0.zip"
+                sparkle:edSignature="M0IsA9O6QeYuLkwajaZFCxaeuW6RZx3NDpLQ9Tac7ZrVhK7JNOB4g8Ngh2MDLMQbOvHufn9zqBa65sTxIb5jBg=="
+                length="54431686"
+                type="application/octet-stream"
+            />
+        </item>
+
+    </channel>
+</rss>
