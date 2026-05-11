@@ -129,11 +129,13 @@
       font-size: 11px; font-weight: 700; letter-spacing: 1px;
       text-transform: uppercase; color: var(--accent);
       margin-bottom: 20px;
+      text-align: center;
     }
     .story h2 {
       font-size: clamp(24px, 3.5vw, 34px);
       font-weight: 700; letter-spacing: -.6px;
-      margin-bottom: 24px; line-height: 1.2;
+      margin-bottom: 36px; line-height: 1.2;
+      text-align: center;
     }
     .story p {
       color: #b0b0bc;
@@ -315,12 +317,11 @@
     }
     .pricing-cards {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
+      max-width: 380px;
+      margin: 0 auto;
       gap: 20px;
       text-align: left;
-    }
-    @media (max-width: 560px) {
-      .pricing-cards { grid-template-columns: 1fr; }
     }
     .pricing-card {
       background: var(--bg2);
@@ -473,8 +474,7 @@
   </div>
   <div class="nav-links">
     <a href="#features">Features</a>
-    <a href="#ai">AI Mode</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#pricing">Download</a>
     <a href="manual.html">Manual</a>
   </div>
   <a href="#pricing" class="nav-cta">Download</a>
@@ -492,7 +492,6 @@
   </p>
   <div class="hero-actions">
     <a href="#pricing" class="btn-primary">Download Free</a>
-    <a href="#ai" class="btn-secondary">About AI Deinterlace ↓</a>
   </div>
   <p class="hero-note">macOS 14 Sonoma or later &nbsp;·&nbsp; Apple Silicon &amp; Intel</p>
   <p class="hero-note" style="margin-top:8px;">⚠️ macOS may flag the app on first launch. Go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>"Open Anyway"</strong>. This is normal for apps distributed outside the App Store.</p>
@@ -512,7 +511,7 @@
     "I needed it, it didn't exist anymore, so I built it."
   </div>
   <p>
-    JazzDeinterlacer is my attempt to fill that gap — and go further. Not just a port, but a modern tool with <strong>state-of-the-art algorithms</strong> including QTGMC and neural-network optical flow, built natively for Apple Silicon.
+    JazzDeinterlacer is my attempt to fill that gap — and go further. Not just a port, but a modern tool with <strong>state-of-the-art algorithms</strong> including QTGMC, built natively for Apple Silicon.
   </p>
   <p>
     It's still in active development. The basics are solid and production-ready. More features are coming. If you were a JesDeinterlacer user, you'll feel at home immediately.
@@ -546,12 +545,12 @@
     <div class="feature-card">
       <div class="feature-icon">⚡️</div>
       <h3>Apple Silicon Native</h3>
-      <p>Optimised for M-series chips. QTGMC runs on dedicated Neural Engine via CoreML for maximum throughput.</p>
+      <p>Optimised for M-series chips. QTGMC runs on multi-core CPU with vectorised optical flow for maximum throughput.</p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">🎬</div>
-      <h3>ProRes &amp; H.264/HEVC Output</h3>
-      <p>Export to ProRes 422, ProRes 4444, ProRes 422 HQ, H.264, or HEVC — whatever your pipeline needs.</p>
+      <h3>ProRes, H.264 &amp; H.265 (HEVC) Output</h3>
+      <p>Export to ProRes 422, ProRes 4444, ProRes 422 HQ, H.264, or H.265 / HEVC — whatever your pipeline needs.</p>
     </div>
     <div class="feature-card">
       <div class="feature-icon">👁</div>
@@ -583,57 +582,12 @@
     <div class="algo-row">
       <span class="algo-check">✓</span>
       <span class="algo-name">QTGMC</span>
-      <span class="algo-desc">Temporal smoothing, highest CPU quality</span>
-    </div>
-    <div class="algo-row">
-      <span class="algo-check">✓</span>
-      <span class="algo-name">AI Deinterlace &nbsp;<span class="algo-tag">Neural</span></span>
-      <span class="algo-desc">RAFT optical flow — best quality</span>
+      <span class="algo-desc">Temporal smoothing, highest quality</span>
     </div>
     <div class="algo-row">
       <span class="algo-check">✓</span>
       <span class="algo-name">Inverse Telecine (IVTC)</span>
       <span class="algo-desc">Auto-detect 3:2 pulldown phase</span>
-    </div>
-  </div>
-</section>
-
-<!-- ── AI SECTION ────────────────────────────────────────────────────── -->
-<section class="ai-section" id="ai">
-  <div class="ai-card">
-    <div>
-      <div class="ai-badge">✦ Neural Mode</div>
-      <h2>The best quality<br>you've seen on <em>any</em> platform.</h2>
-      <p>
-        AI Deinterlace uses <strong>RAFT</strong> — a neural network trained on optical flow — to estimate sub-pixel motion between fields with accuracy no classical algorithm can match.
-      </p>
-      <p>
-        The result: smooth motion, no combing, preserved detail. It's what QTGMC looks like when it's running on a neural network instead of heuristics.
-      </p>
-      <div class="ai-trial-note">2 free exports included with every download. No credit card required.</div>
-      <a href="#pricing" class="btn-ai">Try AI Deinterlace Free</a>
-    </div>
-    <div class="ai-specs">
-      <div class="ai-spec">
-        <div class="ai-spec-label">Algorithm</div>
-        <div class="ai-spec-value">QTGMC + RAFT Neural Flow</div>
-        <div class="ai-spec-note">Recurrent All-Pairs Field Transforms</div>
-      </div>
-      <div class="ai-spec">
-        <div class="ai-spec-label">Acceleration</div>
-        <div class="ai-spec-value">Neural Engine (CoreML / ANE)</div>
-        <div class="ai-spec-note">Optional — falls back to CPU automatically</div>
-      </div>
-      <div class="ai-spec">
-        <div class="ai-spec-label">Output</div>
-        <div class="ai-spec-value">Same-rate or Double-rate</div>
-        <div class="ai-spec-note">29.97i → 29.97p or 59.94p</div>
-      </div>
-      <div class="ai-spec">
-        <div class="ai-spec-label">License</div>
-        <div class="ai-spec-value">One-time purchase</div>
-        <div class="ai-spec-note">2 Macs · Verified via Gumroad</div>
-      </div>
     </div>
   </div>
 </section>
@@ -644,7 +598,7 @@
     <div class="status-icon">🚧</div>
     <div>
       <h4>Active Development</h4>
-      <p>JazzDeinterlacer is functional and production-ready for the features listed above. More is coming: batch processing, OFX plugin for DaVinci Resolve, and more output formats. Found a bug or have an idea? <a href="#bugs" style="color:var(--accent)">Send feedback below.</a></p>
+      <p>JazzDeinterlacer is functional and production-ready for the features listed above. More is coming: more output formats and ongoing performance work. Found a bug or have an idea? <a href="#bugs" style="color:var(--accent)">Send feedback below.</a></p>
     </div>
   </div>
 </section>
@@ -689,42 +643,27 @@
   </form>
 </section>
 
-<!-- ── PRICING ────────────────────────────────────────────────────────── -->
+<!-- ── DOWNLOAD ───────────────────────────────────────────────────────── -->
 <section class="pricing" id="pricing">
-  <h2>Simple, honest pricing.</h2>
-  <p class="pricing-sub">Core deinterlacing is free. Pay only if you need the AI mode.<br>
-  <span style="color:var(--accent); font-weight:600;">$4.99. Less than a coffee. One time.</span></p>
+  <h2>Free download.</h2>
+  <p class="pricing-sub">Every feature in the current release is free.</p>
 
   <div class="pricing-cards">
     <div class="pricing-card">
-      <div class="pricing-plan">Core</div>
+      <div class="pricing-plan">JazzDeinterlacer</div>
       <div class="pricing-price">Free</div>
-      <div class="pricing-period">Always free, no account required</div>
+      <div class="pricing-period">No account required</div>
       <ul class="pricing-features">
         <li><span class="check">✓</span> All CPU deinterlace algorithms</li>
         <li><span class="check">✓</span> Inverse Telecine (IVTC)</li>
         <li><span class="check">✓</span> Video scopes</li>
-        <li><span class="check">✓</span> ProRes &amp; H.264/HEVC export</li>
+        <li><span class="check">✓</span> ProRes, H.264 &amp; H.265 (HEVC) export</li>
         <li><span class="check">✓</span> Live preview</li>
-        <li><span class="x">–</span> AI Deinterlace (2 free exports included)</li>
       </ul>
-      <a href="https://solbraver.github.io/jazzdeinterlacer/releases/JazzDeinterlacer-1.0.zip" class="btn-plan" id="download-btn">Download</a>
+      <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" class="btn-plan" id="download-btn">Download</a>
+      <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Free — tip optional ☕</p>
+      <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Early release — may contain bugs.<br>Reports very welcome via <a href="#bugs" style="color:var(--accent)">feedback below</a>.</p>
       <p style="margin-top:12px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">⚠️ On first launch, macOS may block the app.<br>Go to <strong style="color:var(--text)">System Settings → Privacy &amp; Security → Open Anyway</strong>.</p>
-    </div>
-
-    <div class="pricing-card featured">
-      <div class="pricing-plan">AI Deinterlace</div>
-      <div class="pricing-price">$4.99</div>
-      <div class="pricing-period">One-time · 2 Macs included · No subscription</div>
-      <ul class="pricing-features">
-        <li><span class="check">✓</span> Everything in Core</li>
-        <li><span class="check">✓</span> Unlimited AI Deinterlace exports</li>
-        <li><span class="check">✓</span> RAFT neural optical flow</li>
-        <li><span class="check">✓</span> CoreML / Neural Engine acceleration</li>
-        <li><span class="check">✓</span> 2 activations (2 Macs)</li>
-        <li><span class="check">✓</span> Free updates</li>
-      </ul>
-      <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" class="btn-plan ai" target="_blank">Buy on Gumroad</a>
     </div>
   </div>
 </section>
@@ -733,7 +672,7 @@
 <footer>
   <div class="footer-logo">Jazz<span>Deinterlacer</span></div>
   <div class="footer-links">
-    <a href="https://solbraver.github.io/jazzdeinterlacer/releases/JazzDeinterlacer-1.0.zip">Download</a>
+    <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer">Download</a>
     <a href="manual.html">Manual</a>
     <a href="#bugs">Feedback</a>
     <a href="eula.html">EULA</a>
