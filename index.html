@@ -186,9 +186,6 @@
       transition: border-color .2s;
     }
     .feature-card:hover { border-color: #44444e; }
-    .feature-icon {
-      font-size: 26px; margin-bottom: 14px;
-    }
     .feature-card h3 {
       font-size: 16px; font-weight: 600;
       margin-bottom: 8px; letter-spacing: -.2px;
@@ -290,7 +287,7 @@
       font-size: 13px; color: var(--muted);
       display: flex; align-items: center; gap: 6px;
     }
-    .ai-trial-note::before { content: "✦"; color: var(--ai); }
+    /* .ai-trial-note pseudo-element removed; class no longer rendered. */
     .btn-ai {
       display: inline-block; margin-top: 22px;
       font-size: 15px; font-weight: 600;
@@ -494,7 +491,7 @@
     <a href="#pricing" class="btn-primary">Download Free</a>
   </div>
   <p class="hero-note">macOS 14 Sonoma or later &nbsp;·&nbsp; Apple Silicon &amp; Intel</p>
-  <p class="hero-note" style="margin-top:8px;">⚠️ macOS may flag the app on first launch. Go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>"Open Anyway"</strong>. This is normal for apps distributed outside the App Store.</p>
+  <p class="hero-note" style="margin-top:8px;">macOS may flag the app on first launch. Go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>"Open Anyway"</strong>. This is normal for apps distributed outside the App Store.</p>
 </section>
 
 <!-- ── STORY ─────────────────────────────────────────────────────────── -->
@@ -528,32 +525,26 @@
 
   <div class="features-grid">
     <div class="feature-card">
-      <div class="feature-icon">🎞</div>
       <h3>Multiple Deinterlace Algorithms</h3>
       <p>From fast field blend to full QTGMC temporal smoothing. Pick the algorithm that fits your speed vs. quality tradeoff.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">📽</div>
       <h3>Inverse Telecine (IVTC)</h3>
       <p>Recover the original 23.976p frames from 29.97i film transfers. Auto-detects the 3:2 pulldown cadence.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">🔬</div>
       <h3>Built-in Video Scopes</h3>
       <p>Waveform, vectorscope, and histogram — see exactly what you're working with before and after processing.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">⚡️</div>
       <h3>Apple Silicon Native</h3>
       <p>Optimised for M-series chips. QTGMC runs on multi-core CPU with vectorised optical flow for maximum throughput.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">🎬</div>
       <h3>ProRes, H.264 &amp; H.265 (HEVC) Output</h3>
       <p>Export to ProRes 422, ProRes 4444, ProRes 422 HQ, H.264, or H.265 / HEVC — whatever your pipeline needs.</p>
     </div>
     <div class="feature-card">
-      <div class="feature-icon">👁</div>
       <h3>Live Preview</h3>
       <p>Scrub through any frame, or render a 3-second preview from any position before committing to a full export.</p>
     </div>
@@ -595,7 +586,7 @@
 <!-- ── STATUS BANNER ─────────────────────────────────────────────────── -->
 <section class="status-banner">
   <div class="status-box">
-    <div class="status-icon">🚧</div>
+    <div class="status-icon">β</div>
     <div>
       <h4>Public Beta — 1.0 β1</h4>
       <p>JazzDeinterlacer is in a public beta — the features listed above are solid, and the roadmap to 1.0 is gradient debanding, composite chroma cleanup, IVTC cadence-break detection, and ongoing performance work. Found a bug or have an idea? <a href="#bugs" style="color:var(--accent)">Send feedback below.</a></p>
@@ -661,10 +652,10 @@
         <li><span class="check">✓</span> Live preview</li>
       </ul>
       <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" class="btn-plan" id="download-btn">Download</a>
-      <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Free — tip optional ☕</p>
+      <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Free — tip optional</p>
       <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Public beta — may contain bugs.<br>Reports very welcome via <a href="#bugs" style="color:var(--accent)">feedback below</a>.</p>
       <details style="margin-top:12px; font-size:12px; color:var(--muted); line-height:1.6;">
-        <summary style="cursor:pointer; text-align:center; color:var(--muted);">⚠️ First-launch instructions for macOS</summary>
+        <summary style="cursor:pointer; text-align:center; color:var(--muted);">First-launch instructions for macOS</summary>
         <div style="margin-top:10px; padding:12px 14px; background:var(--bg2); border-radius:8px; text-align:left;">
           <p style="margin-bottom:8px; color:var(--text);">macOS blocks apps that aren't signed with an Apple Developer ID. JazzDeinterlacer is a free side-project — paying for that signature is on the roadmap. Until then:</p>
           <ol style="margin-left:20px; line-height:1.7;">
