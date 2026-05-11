@@ -663,7 +663,18 @@
       <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" class="btn-plan" id="download-btn">Download</a>
       <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Free — tip optional ☕</p>
       <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Public beta — may contain bugs.<br>Reports very welcome via <a href="#bugs" style="color:var(--accent)">feedback below</a>.</p>
-      <p style="margin-top:12px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">⚠️ On first launch, macOS may block the app.<br>Go to <strong style="color:var(--text)">System Settings → Privacy &amp; Security → Open Anyway</strong>.</p>
+      <details style="margin-top:12px; font-size:12px; color:var(--muted); line-height:1.6;">
+        <summary style="cursor:pointer; text-align:center; color:var(--muted);">⚠️ First-launch instructions for macOS</summary>
+        <div style="margin-top:10px; padding:12px 14px; background:var(--bg2); border-radius:8px; text-align:left;">
+          <p style="margin-bottom:8px; color:var(--text);">macOS blocks apps that aren't signed with an Apple Developer ID. JazzDeinterlacer is a free side-project — paying for that signature is on the roadmap. Until then:</p>
+          <ol style="margin-left:20px; line-height:1.7;">
+            <li>Open the downloaded <strong style="color:var(--text)">.dmg</strong> and drag <strong style="color:var(--text)">JazzDeinterlacer.app</strong> onto the <strong style="color:var(--text)">Applications</strong> shortcut.</li>
+            <li>Double-click <strong style="color:var(--text)">JazzDeinterlacer</strong> in Applications. macOS will show <em>"can't be opened"</em> or <em>"is damaged"</em> — that's expected.</li>
+            <li>Open <strong style="color:var(--text)">System Settings → Privacy &amp; Security</strong>. Scroll down. You'll see <em>"JazzDeinterlacer was blocked"</em> — click <strong style="color:var(--text)">Open Anyway</strong>.</li>
+            <li>Confirm the second dialog with <strong style="color:var(--text)">Open</strong>. Only needed once — subsequent launches go straight in.</li>
+          </ol>
+        </div>
+      </details>
     </div>
   </div>
 </section>
