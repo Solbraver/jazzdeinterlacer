@@ -6,14 +6,30 @@
         <description>JazzDeinterlacer release notes</description>
         <language>en</language>
 
-        <!--
-            No items published yet. The 1.0 beta is distributed via
-            Gumroad, not through Sparkle's auto-update channel — once
-            there's a non-beta 1.0 with a signed download we'll publish
-            the first <item> here. Empty channel makes Sparkle report
-            "you're up to date" instead of advertising a stale 1.0
-            release that points at a non-existent zip.
-        -->
+        <item>
+            <title>Version 1.1</title>
+            <link>https://solbraver.github.io/jazzdeinterlacer/</link>
+            <sparkle:version>1.1</sparkle:version>
+            <sparkle:shortVersionString>1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <pubDate>Fri, 31 Jul 2026 11:32:42 -0300</pubDate>
+            <description><![CDATA[
+                <h2>JazzDeinterlacer 1.1</h2>
+                <ul>
+                    <li><strong>Real-time playback</strong> — a RAM cache and master-clock engine play even QTGMC at full speed; JKL shuttle (2×/4×/8×), forward and reverse play with audio.</li>
+                    <li><strong>Before / After Wipe</strong> — compare source and result in one viewer with a draggable divider, during play or frame-by-frame.</li>
+                    <li><strong>Comb-Detector Sensitivity</strong> — one slider that cleans up residual interlace lines on slow or noisy areas, shared by every algorithm.</li>
+                    <li><strong>Pixel-aspect (PAR) correction</strong> — 1:1 / 4:3 / 16:9 display for SD tape sources.</li>
+                    <li><strong>QTGMC detail recovery</strong> and a working Smoothing control.</li>
+                    <li><strong>Customisable keyboard shortcuts</strong> and Open Last (⌘⇧O).</li>
+                    <li>Frame-stepping now matches playback for every algorithm; source audio starts instantly across sessions; DV/AVI fixes.</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://github.com/Solbraver/jazzdeinterlacer/releases/download/v1.1/JazzDeinterlacer-1.1.zip"
+                sparkle:edSignature="BvhKW9atpXCnBF18gMStqF653cPbFDFzso4o5qNvgAoiGxE4/XdlokvZ7TnIlb3yN7Hbg7tV5Z2RFP2GEp5tBA==" length="173523592"
+                type="application/octet-stream" />
+        </item>
 
     </channel>
 </rss>
