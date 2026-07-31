@@ -253,14 +253,12 @@
       <li><a href="#interface">3. Interface Overview</a></li>
       <li><a href="#modes">4. Processing Modes</a></li>
       <li class="sub"><a href="#deinterlace" class="sub">Deinterlace</a></li>
-      <li class="sub"><a href="#ai-deinterlace" class="sub">AI Deinterlace</a></li>
       <li class="sub"><a href="#ivtc" class="sub">Inverse Telecine</a></li>
       <li><a href="#colour">5. Colour Controls</a></li>
       <li><a href="#output">6. Output Settings</a></li>
       <li><a href="#preview-scopes">7. Preview &amp; Scopes</a></li>
       <li><a href="#shortcuts">8. Keyboard Shortcuts</a></li>
-      <li><a href="#license">9. License Activation</a></li>
-      <li><a href="#troubleshooting">10. Troubleshooting</a></li>
+      <li><a href="#troubleshooting">9. Troubleshooting</a></li>
     </ul>
   </aside>
 
@@ -289,7 +287,7 @@
     <h2 id="quick-start">2. Quick Start</h2>
     <ol>
       <li>Click <strong>Open…</strong> in the toolbar (or drag a video file onto the window).</li>
-      <li>Select a <strong>processing mode</strong> in the bottom-left tab: <em>Deinterlace</em>, <em>AI Deinterlace</em>, or <em>Inverse Telecine</em>.</li>
+      <li>Select a <strong>processing mode</strong> in the bottom-left tab: <em>Deinterlace</em> or <em>Inverse Telecine</em>.</li>
       <li>Choose your algorithm and settings.</li>
       <li>Click <strong>Preview 3s</strong> to render a short clip and watch it inline.</li>
       <li>When the result looks right, click <strong>Render</strong> to export the full file.</li>
@@ -327,8 +325,11 @@
       <tr><td>QTGMC</td><td>Highest</td><td>Slow</td><td>Broadcast / archival</td></tr>
     </table>
 
+    <p><strong>Comb Sensitivity</strong> (Spatial Adaptive, Motion Comp, QTGMC — a single shared slider under Field Order): these algorithms weave (keep both fields) where they judge the picture static and only interpolate where they detect motion. Slow or noisy motion — drifting smoke, low-contrast backgrounds — can slip under the threshold and leave interlace lines. Raise Comb Sensitivity to catch that residual combing and interpolate those areas instead. <strong>0 %</strong> = off (sharpest); <strong>100 %</strong> = every field interpolated (no combing, softest). Edges and text are preserved.</p>
+
     <p><strong>QTGMC options:</strong></p>
     <ul>
+      <li><strong>Smoothing:</strong> temporal-smoothing strength (0 = pure spatial / sharpest, 1 = maximum temporal stability). A limited, halo-free sharpen restores fine detail on top.</li>
       <li><strong>Neural Flow (RAFT):</strong> Replaces Lucas-Kanade optical flow with a neural network for better motion estimation. Higher quality, slower.</li>
       <li><strong>Neural Engine:</strong> Runs RAFT on Apple's Neural Engine via CoreML. Faster on Apple Silicon.</li>
     </ul>
@@ -344,15 +345,6 @@
       <li><strong>Same as source</strong> — one progressive frame per input field pair. Halves the frame rate.</li>
       <li><strong>Double rate</strong> — one progressive frame per field. Preserves the original temporal resolution; doubles the frame rate. Recommended for motion-heavy content.</li>
     </ul>
-
-    <h3 id="ai-deinterlace">AI Deinterlace</h3>
-    <p>Uses <strong>Neural QTGMC</strong> — RAFT optical flow combined with QTGMC temporal smoothing, running on Apple Neural Engine. This is the highest quality mode available.</p>
-
-    <div class="tip">
-      <strong>Trial:</strong> Every download includes <strong>2 free AI Deinterlace exports</strong>. After the trial, a license ($4.99 one-time) is required to continue using AI Deinterlace. All other features remain free forever.
-    </div>
-
-    <p>Enable <strong>Neural Engine (CoreML/ANE)</strong> to offload RAFT inference to the dedicated ANE chip. Strongly recommended on Apple Silicon. First run is slower due to CoreML model compilation; subsequent runs are fast.</p>
 
     <h3 id="ivtc">Inverse Telecine (IVTC)</h3>
     <p>Removes 3:2 pulldown from film-sourced content that was telecined to 29.97i. Output is always 23.976p (or 24p with the conform option).</p>
@@ -400,8 +392,12 @@
     <h3>Scrub bar</h3>
     <p>Drag the slider or use keyboard shortcuts to move through the source. The original and processed frames update live.</p>
 
-    <h3>1:1 Zoom</h3>
+    <h3>Compare views (Split / Wipe)</h3>
+    <p>The <strong>View</strong> control in the toolbar switches how the two images are shown. <strong>Split</strong> is side by side (default). <strong>Wipe</strong> overlays them in one viewer with a draggable vertical divider — ORIGINAL on the left, PROCESSED on the right. Drag anywhere to move the divider. Works during playback and scrubbing.</p>
+
+    <h3>1:1 Zoom &amp; Pixel Aspect</h3>
     <p>Click <strong>1:1</strong> to view the video at native pixel size. Drag to pan. Click <strong>Fit</strong> to return to fit-to-window mode.</p>
+    <p>Click <strong>PAR 1:1 / 4:3 / 16:9</strong> to cycle the display aspect. SD tape captures (DV NTSC 720×480) store non-square pixels and look vertically squashed at 1:1 — pick 4:3 (or 16:9 for widescreen tapes) for the true picture shape. Display only; the rendered file is unchanged.</p>
 
     <h3>Scopes window</h3>
     <p>Click the waveform icon (⌇) in the toolbar to open the floating <strong>Scopes</strong> window:</p>
@@ -417,25 +413,18 @@
     <table>
       <tr><th>Key</th><th>Action</th></tr>
       <tr><td><kbd>Space</kbd></td><td>Play / pause (source scrub or inline preview player)</td></tr>
-      <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Step one frame back / forward</td></tr>
-      <tr><td><kbd>J</kbd></td><td>Play backwards</td></tr>
+      <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Step one field / frame back / forward</td></tr>
+      <tr><td><kbd>⇧</kbd><kbd>←</kbd> <kbd>→</kbd></td><td>Step ten fields / frames</td></tr>
+      <tr><td><kbd>J</kbd></td><td>Play backwards (with audio) — press again to shuttle 2×/4×/8×</td></tr>
       <tr><td><kbd>K</kbd></td><td>Stop playback</td></tr>
-      <tr><td><kbd>L</kbd></td><td>Play forwards</td></tr>
+      <tr><td><kbd>L</kbd></td><td>Play forwards — press again to shuttle 2×/4×/8×</td></tr>
+      <tr><td><kbd>⌘</kbd><kbd>O</kbd></td><td>Open…</td></tr>
+      <tr><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>O</kbd></td><td>Open Last (reopen the most recent file)</td></tr>
     </table>
+    <p>The transport and stepping shortcuts are <strong>customisable</strong> in <strong>Preferences → Keyboard</strong> — click a shortcut to record a new key, or reset it.</p>
 
-    <!-- 9. License -->
-    <h2 id="license">9. License Activation</h2>
-    <p>AI Deinterlace is unlocked with a license key purchased at <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" target="_blank">Gumroad</a>.</p>
-    <ol>
-      <li>Open <strong>JazzDeinterlacer → Settings</strong> (<kbd>⌘</kbd><kbd>,</kbd>), or click <strong>Activate License</strong> in the paywall sheet.</li>
-      <li>Paste your license key.</li>
-      <li>Click <strong>Activate</strong>.</li>
-    </ol>
-    <p>The app validates the key against Gumroad's servers. An internet connection is required for initial activation. After that, the license is stored in the macOS Keychain — no connection needed to run the app.</p>
-    <p>One license covers <strong>2 Mac activations</strong>. To move to a new Mac, contact support via the website.</p>
-
-    <!-- 10. Troubleshooting -->
-    <h2 id="troubleshooting">10. Troubleshooting</h2>
+    <!-- 9. Troubleshooting -->
+    <h2 id="troubleshooting">9. Troubleshooting</h2>
 
     <p><strong>"JazzDeinterlacer can't be opened because Apple cannot check it for malicious software."</strong></p>
     <p>Open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. This appears once and is expected for apps distributed outside the App Store.</p>
@@ -448,12 +437,6 @@
 
     <p><strong>H.264 / H.265 is greyed out or shows an FFmpeg warning.</strong></p>
     <p>The bundled FFmpeg binary may have lost its execute permissions. Re-download the app from the website.</p>
-
-    <p><strong>AI Deinterlace is slow on first use.</strong></p>
-    <p>CoreML compiles the RAFT model on the first run — this is a one-time cost. Enable <strong>Neural Engine</strong> in the AI Deinterlace settings for maximum speed on Apple Silicon.</p>
-
-    <p><strong>"License validation failed."</strong></p>
-    <p>Check your internet connection. The key field trims whitespace automatically, but double-check for invisible characters if you typed it manually. Contact support via the <a href="index.html#bugs">feedback form</a> if the problem persists.</p>
 
   </main>
 </div>
