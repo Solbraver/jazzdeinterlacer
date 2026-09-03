@@ -258,7 +258,8 @@
       <li><a href="#output">6. Output Settings</a></li>
       <li><a href="#preview-scopes">7. Preview &amp; Scopes</a></li>
       <li><a href="#shortcuts">8. Keyboard Shortcuts</a></li>
-      <li><a href="#troubleshooting">9. Troubleshooting</a></li>
+      <li><a href="#batch">9. Batch Queue</a></li>
+      <li><a href="#troubleshooting">10. Troubleshooting</a></li>
     </ul>
   </aside>
 
@@ -268,12 +269,12 @@
     <a href="index.html" class="back">← Back to JazzDeinterlacer</a>
 
     <h1 class="page-title">User <span>Manual</span></h1>
-    <p class="page-meta">JazzDeinterlacer 1.0 &nbsp;·&nbsp; macOS 14 Sonoma or later</p>
+    <p class="page-meta">JazzDeinterlacer 1.2 &nbsp;·&nbsp; macOS 14 Sonoma or later</p>
 
     <!-- 1. Installation -->
     <h2 id="installation">1. Installation</h2>
     <ol>
-      <li>Download <code>JazzDeinterlacer-1.0.zip</code> from the website or your Gumroad receipt.</li>
+      <li>Download <code>JazzDeinterlacer-1.2.zip</code> from the website or your Gumroad receipt.</li>
       <li>Unzip and drag <strong>JazzDeinterlacer.app</strong> to your Applications folder.</li>
       <li>Double-click to launch.</li>
     </ol>
@@ -385,6 +386,7 @@
     <p><strong>Output file:</strong> Automatically set to the source file's folder with a descriptive suffix. Click <strong>Change…</strong> to pick a different path.</p>
     <p><strong>Preview 3s:</strong> Renders only the first 3 seconds starting from the current scrub position. The result plays inline in the PROCESSED panel. Use <kbd>Space</kbd> to play/pause, <kbd>←</kbd> <kbd>→</kbd> to step frames.</p>
     <p><strong>Render:</strong> Exports the full file. A progress bar shows frames processed. Click <strong>Cancel</strong> to stop.</p>
+    <p><strong>Parallel segments</strong> (Preferences → Files → Render): long renders are split into segments rendered at the same time — one per performance core by default — and joined without re-encoding, so ProRes exports use every core. H.264 / HEVC go through the shared hardware encoder and gain less. Set it to <strong>Off</strong> for a single pass, or to a fixed count to bound memory use.</p>
 
     <!-- 7. Preview & Scopes -->
     <h2 id="preview-scopes">7. Preview &amp; Scopes</h2>
@@ -423,8 +425,24 @@
     </table>
     <p>The transport and stepping shortcuts are <strong>customisable</strong> in <strong>Preferences → Keyboard</strong> — click a shortcut to record a new key, or reset it.</p>
 
-    <!-- 9. Troubleshooting -->
-    <h2 id="troubleshooting">9. Troubleshooting</h2>
+    <!-- 9. Batch Queue -->
+    <h2 id="batch">9. Batch Queue</h2>
+    <p>Open the queue with the <strong>Batch</strong> button in the toolbar. It renders any number of files one after another, each with its own settings, and keeps the list between sessions.</p>
+
+    <h3>Adding files</h3>
+    <p><strong>Add Files…</strong>, <strong>Add Folder…</strong> or drag files onto the list. New items start from the settings currently active in the main window. <strong>+ Batch</strong> in the main window queues the open file with its exact settings and the same output name Render would use.</p>
+
+    <h3>Settings panel</h3>
+    <p>Select one or more items to edit them: processing mode, the <strong>Deinterlace</strong> controls (algorithm, field order, output rate, comb sensitivity, smoothing, ghost tolerance, flash detection) or the <strong>Inverse Telecine</strong> controls (field order, phase, 23.976 → 24 conform), output codec and profile, prefix / suffix, output folder and the error policy. <strong>Apply to N files</strong> writes the panel onto the selection; <strong>Use Main Window Settings</strong> copies the main window's current settings onto the selection instead. Items whose settings differ from the queue defaults show a pencil.</p>
+
+    <h3>Status</h3>
+    <p>Each item is <strong>queued</strong> (○), <strong>rendered</strong> (✓), <strong>failed</strong> (✗) or <strong>skipped</strong> (−). <strong>Render All</strong> renders the queued items only. The <strong>Status</strong> menu — or a right-click on a row — offers <strong>Reset Status</strong> (back to the queue, to render a finished file again), <strong>Skip</strong> / <strong>Unskip</strong>, <strong>Reset All</strong> (render everything again) and <strong>Remove</strong>. <strong>Retry Failed</strong> re-queues the failed items and starts.</p>
+
+    <h3>Progress</h3>
+    <p>While rendering, the footer shows the current file with its own bar, frames, fps and remaining time, and an overall bar for the whole queue ("N of M done"). The running row shows its percentage.</p>
+
+    <!-- 10. Troubleshooting -->
+    <h2 id="troubleshooting">10. Troubleshooting</h2>
 
     <p><strong>"JazzDeinterlacer can't be opened because Apple cannot check it for malicious software."</strong></p>
     <p>Open <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. This appears once and is expected for apps distributed outside the App Store.</p>
