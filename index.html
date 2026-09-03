@@ -388,6 +388,13 @@
       transition: border-color .15s;
     }
     .btn-plan:hover { border-color: var(--muted); text-decoration: none; }
+    .btn-plan.tip {
+      margin-top: 10px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+    .btn-plan.tip:hover { opacity: .85; border-color: var(--accent); }
     .btn-plan.ai {
       background: var(--ai); color: #fff; border: none;
     }
@@ -640,8 +647,14 @@
   <div class="status-box">
     <div class="status-icon">β</div>
     <div>
-      <h4>Public Beta — 1.2</h4>
-      <p>JazzDeinterlacer is in a public beta — the features listed above are solid. Version 1.2 adds parallel rendering (long exports are split into segments rendered at once, so ProRes uses every core), a batch queue with per-file deinterlace and IVTC settings, Media Encoder-style status control (reset, skip, render again) and clear per-file progress. Still on the roadmap: gradient debanding, composite chroma cleanup, IVTC cadence-break detection, and ongoing performance work. Found a bug or have an idea? <a href="#bugs" style="color:var(--accent)">Send feedback below.</a></p>
+      <h4>Public Beta — 1.2 <span style="font-weight:400; font-size:13px; color:var(--muted);">· September 2026</span></h4>
+      <p>JazzDeinterlacer is in a public beta — the features listed above are solid. New in 1.2:</p>
+      <ul style="margin:8px 0 10px 18px; color:var(--muted); font-size:14px; line-height:1.7;">
+        <li><strong style="color:var(--text)">Parallel rendering</strong> — long exports are split into segments rendered at the same time and joined without re-encoding. ProRes now uses every core.</li>
+        <li><strong style="color:var(--text)">Batch queue</strong> — per-file deinterlace and IVTC settings, new files inherit the main window's settings, Media Encoder-style status control (render again, skip), clear per-file progress.</li>
+        <li>Fix: “+ Batch” could queue an output path equal to the source file.</li>
+      </ul>
+      <p>Existing users get 1.2 through the built-in updater. <a href="https://github.com/Solbraver/jazzdeinterlacer/releases/tag/v1.2" style="color:var(--accent)">Full release notes</a>. Still on the roadmap: gradient debanding, composite chroma cleanup, IVTC cadence-break detection, and ongoing performance work. Found a bug or have an idea? <a href="#bugs" style="color:var(--accent)">Send feedback below.</a></p>
     </div>
   </div>
 </section>
@@ -676,7 +689,7 @@
     </div>
     <div class="form-group">
       <label for="version">macOS version &amp; app build</label>
-      <input type="text" id="version" name="version" placeholder="e.g. macOS 14.5, JazzDeinterlacer 1.0" autocomplete="off">
+      <input type="text" id="version" name="version" placeholder="e.g. macOS 14.5, JazzDeinterlacer 1.2" autocomplete="off">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
@@ -689,29 +702,32 @@
 <!-- ── DOWNLOAD ───────────────────────────────────────────────────────── -->
 <section class="pricing" id="pricing">
   <h2>Free download.</h2>
-  <p class="pricing-sub">Every feature in the current release is free.</p>
+  <p class="pricing-sub">Every feature in the current release is free. No account, no subscription, no telemetry.</p>
 
   <div class="pricing-cards">
     <div class="pricing-card">
-      <div class="pricing-plan">JazzDeinterlacer</div>
+      <div class="pricing-plan">JazzDeinterlacer 1.2</div>
       <div class="pricing-price">Free</div>
-      <div class="pricing-period">No account required</div>
+      <div class="pricing-period">macOS 14 Sonoma or later &nbsp;·&nbsp; Apple Silicon &amp; Intel &nbsp;·&nbsp; 174 MB</div>
       <ul class="pricing-features">
         <li><span class="check">✓</span> All CPU deinterlace algorithms</li>
         <li><span class="check">✓</span> Inverse Telecine (IVTC)</li>
+        <li><span class="check">✓</span> Batch queue &amp; parallel rendering</li>
         <li><span class="check">✓</span> Video scopes</li>
         <li><span class="check">✓</span> ProRes, H.264 &amp; H.265 (HEVC) export</li>
-        <li><span class="check">✓</span> Live preview</li>
+        <li><span class="check">✓</span> Live preview &amp; real-time playback</li>
+        <li><span class="check">✓</span> Automatic updates</li>
       </ul>
-      <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" class="btn-plan" id="download-btn">Download</a>
-      <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Free — tip optional</p>
+      <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer" class="btn-plan" id="download-btn">Download 1.2 on Gumroad</a>
+      <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer?wanted=true" class="btn-plan tip" id="tip-btn">☕ Leave a tip</a>
+      <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Enter $0 on Gumroad to download for free, or leave what it was worth to you.<br>Mirror: <a href="https://github.com/Solbraver/jazzdeinterlacer/releases/download/v1.2/JazzDeinterlacer-1.2.zip" style="color:var(--accent)">direct download from GitHub</a> &nbsp;·&nbsp; <a href="https://github.com/Solbraver/jazzdeinterlacer/releases/tag/v1.2" style="color:var(--accent)">release notes</a></p>
       <p style="margin-top:10px; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;">Public beta — may contain bugs.<br>Reports very welcome via <a href="#bugs" style="color:var(--accent)">feedback below</a>.</p>
       <details style="margin-top:12px; font-size:12px; color:var(--muted); line-height:1.6;">
         <summary style="cursor:pointer; text-align:center; color:var(--muted);">First-launch instructions for macOS</summary>
         <div style="margin-top:10px; padding:12px 14px; background:var(--bg2); border-radius:8px; text-align:left;">
           <p style="margin-bottom:8px; color:var(--text);">macOS blocks apps that aren't signed with an Apple Developer ID. JazzDeinterlacer is a free side-project — paying for that signature is on the roadmap. Until then:</p>
           <ol style="margin-left:20px; line-height:1.7;">
-            <li>Open the downloaded <strong style="color:var(--text)">.dmg</strong> and drag <strong style="color:var(--text)">JazzDeinterlacer.app</strong> onto the <strong style="color:var(--text)">Applications</strong> shortcut.</li>
+            <li>Double-click the downloaded <strong style="color:var(--text)">.zip</strong> to unpack it and drag <strong style="color:var(--text)">JazzDeinterlacer.app</strong> into your <strong style="color:var(--text)">Applications</strong> folder.</li>
             <li>Double-click <strong style="color:var(--text)">JazzDeinterlacer</strong> in Applications. macOS will show <em>"can't be opened"</em> or <em>"is damaged"</em> — that's expected.</li>
             <li>Open <strong style="color:var(--text)">System Settings → Privacy &amp; Security</strong>. Scroll down. You'll see <em>"JazzDeinterlacer was blocked"</em> — click <strong style="color:var(--text)">Open Anyway</strong>.</li>
             <li>Confirm the second dialog with <strong style="color:var(--text)">Open</strong>. Only needed once — subsequent launches go straight in.</li>
@@ -727,6 +743,7 @@
   <div class="footer-logo">Jazz<span>Deinterlacer</span></div>
   <div class="footer-links">
     <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer">Download</a>
+    <a href="https://arielwollinger.gumroad.com/l/jazzdeinterlacer?wanted=true">Tip</a>
     <a href="manual.html">Manual</a>
     <a href="#bugs">Feedback</a>
     <a href="eula.html">EULA</a>
