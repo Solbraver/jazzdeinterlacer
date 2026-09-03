@@ -7,6 +7,30 @@
         <language>en</language>
 
         <item>
+            <title>Version 1.2</title>
+            <link>https://solbraver.github.io/jazzdeinterlacer/</link>
+            <sparkle:version>1.2</sparkle:version>
+            <sparkle:shortVersionString>1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <pubDate>Thu, 03 Sep 2026 13:40:21 -0300</pubDate>
+            <description><![CDATA[
+                <h2>JazzDeinterlacer 1.2</h2>
+                <ul>
+                    <li><strong>Parallel rendering</strong> — long exports are split into segments rendered at the same time and joined without re-encoding, so ProRes uses every core. Preferences → Files → Render sets the number of segments (automatic by default).</li>
+                    <li><strong>Batch queue: deinterlace and IVTC settings per file</strong> — algorithm, field order, output rate, comb sensitivity, smoothing, ghost tolerance, flash detection, IVTC phase and conform.</li>
+                    <li><strong>Batch queue follows the main window</strong> — new files start from the settings active in the main window; "Use Main Window Settings" copies them onto selected files.</li>
+                    <li><strong>Batch status control</strong> — Reset Status to render a finished file again, Skip / Unskip, Reset All, Remove; right-click any row.</li>
+                    <li><strong>Clear batch progress</strong> — current file with frames, fps and remaining time, plus an overall bar for the queue.</li>
+                    <li>Fix: "+ Batch" could queue an output path equal to the source file; batch outputs now use the same descriptive suffix as Render, and the queue refuses an output equal to its source.</li>
+                </ul>
+            ]]></description>
+            <enclosure
+                url="https://github.com/Solbraver/jazzdeinterlacer/releases/download/v1.2/JazzDeinterlacer-1.2.zip"
+                sparkle:edSignature="1OxUweak36VA3Q+uzt+dvcNJ3Jir747U3OtyM64sUVx10xjDYmmtECsWH0+00MaEbuqFlkVT+UtNP7nx2GjBCg==" length="173625579"
+                type="application/octet-stream" />
+        </item>
+
+        <item>
             <title>Version 1.1</title>
             <link>https://solbraver.github.io/jazzdeinterlacer/</link>
             <sparkle:version>1.1</sparkle:version>
